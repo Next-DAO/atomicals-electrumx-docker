@@ -17,7 +17,7 @@ You can also download script from https://github.com/bitcoin/bitcoin/blob/master
 ### 2. Clone this repo and Run the server:
 
 ```bash
-git clone git@github.com:lucky2077/atomicals-electrumx-docker.git
+git clone https://github.com/lucky2077/atomicals-electrumx-docker.git
 ```
 
 ```bash
