@@ -24,6 +24,12 @@ git clone https://github.com/lucky2077/atomicals-electrumx-docker.git
 cd atomicals-electrumx-docker
 ```
 
+Create an `.env` file with the following contents:
+
+```ini
+DAEMON_URL=http://electrumx:electrumx@{your-lan-ip}:8332/
+```
+
 ```bash
 docker-compose up -d
 ```
