@@ -9,10 +9,14 @@ Aim to provide a simple and easy way to run [atomicals-electrumx](https://github
 Add this to your bitcoin.conf, and restart your bitcoin full node.
 
 ```
+txindex=1
 rpcauth=electrumx:c7ed296134ebe0035d9ff786dfa102b5$9d40e8e36bcdba1e3ca0a79178c3864c3deaa9e6fd484ff683e7770690a97097
 ```
 
-You can also download script from https://github.com/bitcoin/bitcoin/blob/master/share/rpcauth/rpcauth.py. And generate one by yourself.
+- `txindex=1` is required for ElectrumX to work. You need wait for full node to reindex.
+- You can also download script from https://github.com/bitcoin/bitcoin/blob/master/share/rpcauth/rpcauth.py. And generate one by yourself.
+
+### 2. Clone this repo and Run the server:
 
 ```bash
 git clone https://github.com/lucky2077/atomicals-electrumx-docker.git
@@ -25,7 +29,7 @@ cd atomicals-electrumx-docker
 For users who set rpcauth by themselves, you should create an `.env` file:
 
 ```ini
-DAEMON_URL=http://<rpcuser>:<rpcpassword>@<rpcip>:<rpcport>
+DAEMON_URL=<rpcuser>:<rpcpassword>@<rpcip>:<rpcport>
 ```
 
 Then run the ElectrumX server:
