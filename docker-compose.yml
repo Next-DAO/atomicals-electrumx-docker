@@ -3,8 +3,7 @@ services:
   electrumx:
     image: lucky2077/atomicals-electrumx:latest
     restart: always
-    ports:
-      - 50004:50004
+    network_mode: host
     volumes:
       - ./data:/data
     environment:
