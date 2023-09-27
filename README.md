@@ -4,35 +4,32 @@ Aim to provide a simple and easy way to run [atomicals-electrumx](https://github
 
 ## Usage
 
-### 1. Create an empty directory:
+### 1. Update your Bitcoin Full Node RPC settings, _SKIP_ if you already set.
+
+Add this to your bitcoin.conf, and restart your bitcoin full node.
+
+```
+rpcauth=electrumx:c7ed296134ebe0035d9ff786dfa102b5$9d40e8e36bcdba1e3ca0a79178c3864c3deaa9e6fd484ff683e7770690a97097
+```
+
+You can also download script from https://github.com/bitcoin/bitcoin/blob/master/share/rpcauth/rpcauth.py. And generate one by yourself.
+
+### 2. Clone this repo and Run the server:
 
 ```bash
-mkdir atomicals-electrumx && cd atomicals-electrumx
+git clone git@github.com:lucky2077/atomicals-electrumx-docker.git
 ```
-
-### 2. Update your Bitcoin Full Node RPC settings, _SKIP_ if you already set.
-
-```
-# bitcoin.conf
-rpcauth=username:hased_password
-```
-
-### 3. Run the server:
 
 ```bash
-docker run --name atomicals-electrumx -it -d \
--v `pwd`/data:/data \
--e DAEMON_URL=username:password@host:port \
--p 50004:50004 \
-lucky2077/atomicals-electrumx
+cd atomicals-electrumx-docker
 ```
 
-- `pwd`/data will be used to store the server data and configuration files.
-- `DAEMON_URL` is the RPC URL of your Bitcoin Full Node.
-  - `username`: from step 2.
-  - `password`: from step 2 but not hashed.
-  - `host`: your Bitcoin Full Node host.
-  - `port`: your Bitcoin Full Node RPC port. normally `8332` for mainnet and `18332` for testnet.
+```bash
+docker-compose up -d
+```
+
+- use `docker-compose logs -f` to check the logs.
+- use `docker-compose down` to stop the server.
 
 **NOTE**
 
