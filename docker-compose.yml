@@ -7,6 +7,6 @@ services:
     volumes:
       - ./data:/data
     environment:
-      - DAEMON_URL=${DAEMON_URL:-electrumx:electrumx@127.0.0.1:8332}
+      - DAEMON_URL=${DAEMON_URL:?}
       - COIN=BitCoin
       
