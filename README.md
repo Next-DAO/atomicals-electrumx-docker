@@ -14,8 +14,6 @@ rpcauth=electrumx:c7ed296134ebe0035d9ff786dfa102b5$9d40e8e36bcdba1e3ca0a79178c38
 
 You can also download script from https://github.com/bitcoin/bitcoin/blob/master/share/rpcauth/rpcauth.py. And generate one by yourself.
 
-### 2. Clone this repo and Run the server:
-
 ```bash
 git clone https://github.com/lucky2077/atomicals-electrumx-docker.git
 ```
@@ -23,6 +21,14 @@ git clone https://github.com/lucky2077/atomicals-electrumx-docker.git
 ```bash
 cd atomicals-electrumx-docker
 ```
+
+For users who set rpcauth by themselves, you should create an `.env` file:
+
+```ini
+DAEMON_URL=http://<rpcuser>:<rpcpassword>@<rpcip>:<rpcport>
+```
+
+Then run the ElectrumX server:
 
 ```bash
 docker-compose up -d
