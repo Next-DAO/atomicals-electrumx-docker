@@ -2,10 +2,11 @@ FROM python:3.11-alpine3.16
 
 ARG VERSION=master
 
+ADD https://github.com/atomicals/atomicals-electrumx/archive/${VERSION}.zip /tmp/
+
 RUN set -ex && \
     apk add --no-cache build-base openssl leveldb-dev && \
-    wget https://github.com/atomicals/atomicals-electrumx/archive/${VERSION}.zip -O /tmp/electrumx.zip && \
-    cd /tmp && unzip electrumx.zip && \
+    cd /tmp && unzip master.zip && \
     mv /tmp/atomicals-electrumx-${VERSION} /electrumx && \
     cd /electrumx && \
     pip install .[ujson,uvloop,crypto] && \
