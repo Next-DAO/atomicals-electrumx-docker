@@ -6,7 +6,7 @@ ADD https://github.com/atomicals/atomicals-electrumx/archive/${VERSION}.zip /tmp
 
 RUN set -ex && \
     apk add --no-cache build-base openssl leveldb-dev && \
-    cd /tmp && unzip master.zip && \
+    cd /tmp && unzip ${VERSION}.zip && \
     mv /tmp/atomicals-electrumx-${VERSION} /electrumx && \
     cd /electrumx && \
     pip install .[ujson,uvloop,crypto] && \
