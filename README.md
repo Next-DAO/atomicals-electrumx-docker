@@ -2,6 +2,12 @@
 
 Aim to provide a simple and easy way to run [atomicals-electrumx](https://github.com/atomicals/atomicals-electrumx) server. Inspired by https://github.com/lukechilds/docker-electrumx.
 
+
+## Requirements
+
+1. Bitcoin Full Node
+2. At least **90G** left in your storage.
+
 ## Usage
 
 ### 1. Update your Bitcoin Full Node RPC settings, _SKIP_ if you already set.
@@ -42,7 +48,7 @@ DAEMON_URL=electrumx:electrumx@192.168.50.2:8332
 Then run the ElectrumX server:
 
 ```bash
-docker-compose up -d
+docker-compose pull && docker-compose up -d
 ```
 
 - use `docker-compose logs -f` to check the logs.
@@ -53,18 +59,3 @@ docker-compose up -d
 - You should stop here until the server is fully synced.
 - The `data` directory will be more than **90G** after sync.
 
-### 3. Update `.env` in your `atomicals-js` project as below:
-
-```ini
-# ELECTRUMX_WSS=wss://electrumx.atomicals.xyz:50012
-ELECTRUMX_WSS=wss://127.0.0.1:50004
-```
-
-### 4. Edit `lib/api/electrum-api.ts` file in your `atomicals-js`
-
-```diff
--        this.ws = new WebSocket(this.url);
-+        this.ws = new WebSocket(this.url, { rejectUnauthorized: false });
-```
-
-### 5. Then you can use `atomicals-js` all cli as before.
