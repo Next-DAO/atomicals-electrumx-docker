@@ -29,4 +29,6 @@ WORKDIR /data
 
 COPY ./bin /usr/local/bin
 
+EXPOSE 50001 50002 50004 8000
+
 CMD ["init"]

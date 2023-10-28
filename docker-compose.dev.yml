@@ -1,7 +1,7 @@
 version: '3'
 services:
   electrumx:
-    image: lucky2077/atomicals-electrumx:latest
+    build: .
     restart: always
     ports:
       - 50001:50001
@@ -9,7 +9,7 @@ services:
       - 50004:50004
       - 8000:8000
     volumes:
-      - ./data:/data
+      - ./data-dev:/data
     environment:
       - DAEMON_URL=${DAEMON_URL:?}
       - COIN=BitCoin
