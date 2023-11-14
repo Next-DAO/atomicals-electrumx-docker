@@ -20,9 +20,9 @@ _assuming your lan ip is `192.168.50.2`_
 txindex=1
 rpcauth=electrumx:c7ed296134ebe0035d9ff786dfa102b5$9d40e8e36bcdba1e3ca0a79178c3864c3deaa9e6fd484ff683e7770690a97097
 
-rpcbind=127.0.0.1
-rpcbind=192.168.50.2
+rpcbind=0.0.0.0
 rpcallowip=127.0.0.1
+rpcallowip=172.0.0.0/8
 rpcallowip=192.168.50.2
 ```
 
