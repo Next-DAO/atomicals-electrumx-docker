@@ -6,7 +6,7 @@ Aim to provide a simple and easy way to run [atomicals-electrumx](https://github
 ## Requirements
 
 1. Bitcoin Full Node
-2. At least **90G** left in your storage.
+2. At least **100G** left in your storage.
 
 ## Usage
 
