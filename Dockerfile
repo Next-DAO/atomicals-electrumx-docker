@@ -13,7 +13,7 @@ WORKDIR /usr/src/app
 # Install the libs needed by rocksdb (including development headers)
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
-    librocksdb-dev libsnappy-dev libbz2-dev libz-dev liblz4-dev \
+    librocksdb-dev libsnappy-dev libbz2-dev libz-dev liblz4-dev libleveldb-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python -m venv venv \
@@ -26,7 +26,7 @@ FROM python:3.9.16-slim-bullseye
 # Install the libs needed by rocksdb (no development headers or statics)
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
-    netcat librocksdb6.11 libsnappy1v5 libbz2-1.0 zlib1g liblz4-1 \
+    netcat librocksdb6.11 libsnappy1v5 libbz2-1.0 zlib1g liblz4-1 libleveldb1d \
     && rm -rf /var/lib/apt/lists/*
 
 ENV SERVICES="tcp://:50001"
