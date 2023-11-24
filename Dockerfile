@@ -1,4 +1,4 @@
-FROM python:3.9.16-bullseye AS builder
+FROM python:3.9.18-bullseye AS builder
 
 ARG VERSION=master
 
@@ -21,7 +21,7 @@ RUN python -m venv venv \
     && venv/bin/pip install --no-cache-dir e-x[rapidjson,uvloop,crypto,rocksdb]==1.16.0
 
 
-FROM python:3.9.16-slim-bullseye
+FROM python:3.9.18-slim-bullseye
 
 # Install the libs needed by rocksdb (no development headers or statics)
 RUN apt-get update \
