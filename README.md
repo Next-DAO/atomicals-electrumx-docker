@@ -1,10 +1,14 @@
-# Atomicals ElectrumX Docker [Deprecated]
+# Atomicals ElectrumX Docker
 
-You can read this as reference, but deploy Atomicals RPC endpoint using this repo https://github.com/Next-DAO/atomicals-electrumx-proxy-docker
+This repo only used to build `ElectrumX` image. You can read this as reference, but deploy Atomicals RPC endpoint using this repo https://github.com/Next-DAO/atomicals-electrumx-proxy-docker
+
+本项目仅用来构建 `ElectrumX` 镜像，可以作为参考，但是部署 Atomicals RPC 节点请使用这个项目 https://github.com/Next-DAO/atomicals-electrumx-proxy-docker 
 
 --------------
 
-Aim to provide a simple and easy way to run [atomicals-electrumx](https://github.com/atomicals/atomicals-electrumx) server. Inspired by https://github.com/lukechilds/docker-electrumx.
+Aim to provide a simple and easy way to run [atomicals-electrumx](https://github.com/atomicals/atomicals-electrumx) server.
+
+Dockerfile is based on [Dockerfile from Official Repository](https://github.com/atomicals/atomicals-electrumx/blob/master/contrib/Dockerfile)
 
 
 ## Requirements

@@ -1,34 +1,49 @@
-FROM python:3.9-alpine3.16
+FROM python:3.9.16-bullseye AS builder
 
 ARG VERSION=master
 
 ADD https://github.com/atomicals/atomicals-electrumx/archive/${VERSION}.zip /tmp/
 
 RUN set -ex && \
-    apk add --no-cache build-base openssl leveldb-dev && \
     cd /tmp && unzip ${VERSION}.zip && \
-    mv /tmp/atomicals-electrumx-${VERSION} /electrumx && \
-    cd /electrumx && \
-    pip install .[ujson,uvloop,crypto] && \
-    apk del build-base && \
-    rm -rf /tmp/*
+    mv /tmp/atomicals-electrumx-${VERSION} /usr/src/app
 
-VOLUME ["/data"]
+WORKDIR /usr/src/app
 
-ENV HOME /data
-ENV ALLOW_ROOT 1
-ENV EVENT_LOOP_POLICY uvloop
-ENV DB_DIRECTORY /data
-ENV COIN=BitCoin
-ENV SERVICES=tcp://:50001,ssl://:50002,wss://:50004,rpc://0.0.0.0:8000
-ENV SSL_CERTFILE ${DB_DIRECTORY}/electrumx.crt
-ENV SSL_KEYFILE ${DB_DIRECTORY}/electrumx.key
-ENV HOST ""
+# Install the libs needed by rocksdb (including development headers)
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install \
+    librocksdb-dev libsnappy-dev libbz2-dev libz-dev liblz4-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /data
+RUN python -m venv venv \
+    && venv/bin/pip install Cython==0.29.28 \
+    && venv/bin/pip install --no-cache-dir e-x[rapidjson,uvloop,crypto,rocksdb]==1.16.0
 
-COPY ./bin /usr/local/bin
 
-EXPOSE 50001 50002 50004 8000
+FROM python:3.9.16-slim-bullseye
 
-CMD ["init"]
+# Install the libs needed by rocksdb (no development headers or statics)
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install \
+    netcat librocksdb6.11 libsnappy1v5 libbz2-1.0 zlib1g liblz4-1 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV SERVICES="tcp://:50001"
+ENV COIN=Bitcoin
+ENV DB_DIRECTORY=/data
+ENV DAEMON_URL="http://username:password@hostname:port/"
+ENV ALLOW_ROOT=true
+ENV EVENT_LOOP_POLICY=uvloop
+ENV MAX_SEND=10000000
+ENV BANDWIDTH_UNIT_COST=50000
+ENV CACHE_MB=2000
+
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app .
+
+VOLUME /data
+
+RUN mkdir -p "$DB_DIRECTORY"
+
+CMD ["/usr/src/app/venv/bin/python", "/usr/src/app/venv/bin/electrumx_server"]
