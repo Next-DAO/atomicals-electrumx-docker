@@ -7,6 +7,10 @@ on:
         required: true
         type: string
         description: "The version of the image to build"
+      electrumx-version:
+        required: false
+        type: string
+        default: "master"
 
 jobs:
   build:
@@ -37,5 +41,7 @@ jobs:
           platforms: linux/amd64,linux/arm64 # optional
           # Push is a shorthand for --output=type=registry
           push: true # optional, default is false
+          build-args: |
+            VERSION=${{ inputs.electrumx-version }}
           # List of tags
           tags: lucky2077/atomicals-electrumx:${{ inputs.image-version }}
