@@ -1,0 +1,26 @@
+name: Build Every Day
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  gen-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.gen-version.outputs.version }}
+    steps:
+      - name: Generate Version
+        id: gen-version
+        run: |
+          echo "version=$(date 'YYYYMMDD')" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: gen-version
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/build-image.yml
+    with:
+      image-version: ${{ needs.gen-version.outputs.version }}
+    secrets: inherit

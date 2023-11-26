@@ -1,10 +1,12 @@
-name: Build and Push Docker Images
+name: Build Image
 
 on:
-  schedule:
-    - cron: "0 0 * * *"
-  push:
-    branches: ["main"]
+  workflow_call:
+    inputs:
+      image-version:
+        required: true
+        type: string
+        description: "The version of the image to build"
 
 jobs:
   build:
@@ -47,4 +49,4 @@ jobs:
           # Push is a shorthand for --output=type=registry
           push: true # optional, default is false
           # List of tags
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: lucky2077/atomicals-electrumx:${{ inputs.image-version }}

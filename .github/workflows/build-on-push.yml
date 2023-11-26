@@ -1,0 +1,15 @@
+name: Build on Push
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/build-image.yml
+    with:
+      image-version: latest
+    secrets: inherit
