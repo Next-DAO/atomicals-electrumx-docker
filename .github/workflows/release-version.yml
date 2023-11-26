@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       electrumx-version:
-        description: "ElectrumX Version"
+        description: "ElectrumX Version, eg: v1.2.1"
         required: true
 
 jobs:

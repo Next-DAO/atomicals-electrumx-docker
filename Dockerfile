@@ -6,7 +6,7 @@ ADD https://github.com/atomicals/atomicals-electrumx/archive/${VERSION}.zip /tmp
 
 RUN set -ex && \
     cd /tmp && unzip ${VERSION}.zip && \
-    mv /tmp/atomicals-electrumx-${VERSION} /usr/src/app
+    mv /tmp/atomicals-electrumx-${VERSION#v} /usr/src/app
 
 WORKDIR /usr/src/app
 
