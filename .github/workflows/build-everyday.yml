@@ -13,7 +13,7 @@ jobs:
       - name: Generate Version
         id: gen-version
         run: |
-          echo "version=$(date 'YYYYMMDD')" >> "$GITHUB_OUTPUT"
+          echo "version=$(date +'%Y%m%d')" >> "$GITHUB_OUTPUT"
 
   build:
     needs: gen-version
