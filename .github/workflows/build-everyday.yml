@@ -5,16 +5,6 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
-  gen-version:
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.gen-version.outputs.version }}
-    steps:
-      - name: Generate Version
-        id: gen-version
-        run: |
-          echo "version=$(date +'%Y%m%d')" >> "$GITHUB_OUTPUT"
-
   build-latest:
     permissions:
       contents: read
@@ -22,14 +12,4 @@ jobs:
     uses: ./.github/workflows/build-image.yml
     with:
       image-version: latest
-    secrets: inherit
-
-  build-daily:
-    needs: [gen-version, build-latest]
-    permissions:
-      contents: read
-      id-token: write
-    uses: ./.github/workflows/build-image.yml
-    with:
-      image-version: ${{ needs.gen-version.outputs.version }}
     secrets: inherit
