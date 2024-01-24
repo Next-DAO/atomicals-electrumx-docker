@@ -6,10 +6,10 @@ ARG VERSION=master
 ADD https://github.com/atomicals/atomicals-electrumx.git#${VERSION} /electrumx
 
 RUN set -ex && \
-    apk add --no-cache build-base openssl leveldb-dev && \
+    apk add --no-cache build-base git openssl leveldb-dev && \
     cd /electrumx && \
     pip install .[ujson,uvloop,crypto] && \
-    apk del build-base
+    apk del build-base git
 
 VOLUME ["/data"]
 
