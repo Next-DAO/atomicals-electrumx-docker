@@ -17,5 +17,5 @@ services:
     volumes:
       - ./electrumx-data:/data
     environment:
-      - DAEMON_URL=${DAEMON_URL:?}
+      - DAEMON_URL=nextdao:nextdao@127.0.0.1:8332
       - COIN=BitCoin

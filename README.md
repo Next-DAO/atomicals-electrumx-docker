@@ -28,11 +28,7 @@ rpcbind=0.0.0.0
 
 ### 1. Download [docker-compose.yml](https://github.com/Next-DAO/atomicals-electrumx-docker/raw/main/docker-compose.yml) to a folder.
 
-Create an `.env` file with content below:
-
-```ini
-DAEMON_URL=nextdao:nextdao@127.0.0.1:8332
-```
+Edit `docker-compose.yml`:
 
 - if BTC full node is running on another host, change `127.0.0.1` to the `ip` of the host.
 - also you can change `nextdao:nextdao` to your `rpcuser:rpcpassword` in `bitcoin.conf
@@ -67,9 +63,10 @@ If you see `electrumx` is `healthy`, then the server is ready.
 
 Double check your `bitcoin.conf` and `docker-compose.yml`.
 
-1. If your `ip` included in `rpcallowip` of `bitcoin.conf`?
+1. If your local ip included in `rpcallowip` of `bitcoin.conf`?
 2. If `bitcoind` listen on `8332` port?
-3. If `bitcoind` rpc username and password is correct?
+3. Use your local ip instead of `127.0.0.1` in `docker-compose.yml`, eg: `192.168.50.2`
+4. Is `bitcoind` rpc username and password correct?
 
 ### 3. Why the sync is so slow?
 
