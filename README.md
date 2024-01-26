@@ -2,8 +2,6 @@
 
 Aim to provide a simple and easy way to run [atomicals-electrumx](https://github.com/atomicals/atomicals-electrumx) server.
 
-Dockerfile is based on [Dockerfile from Official Repository](https://github.com/atomicals/atomicals-electrumx/blob/master/contrib/Dockerfile)
-
 ## Requirements
 
 ### 1. Bitcoin Full Node with `txindex=1` and enable rpc. A example of `bitcoin.conf`:
