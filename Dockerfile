@@ -1,13 +1,14 @@
 # syntax=docker/dockerfile:1.5-labs
+
 FROM python:3.9-alpine3.16
 
 ARG VERSION=master
-
 ADD https://github.com/atomicals/atomicals-electrumx.git#${VERSION} /electrumx
+
+WORKDIR /electrumx
 
 RUN set -ex && \
     apk add --no-cache build-base git openssl leveldb-dev && \
-    cd /electrumx && \
     pip install .[ujson,uvloop,crypto] && \
     apk del build-base git
 
@@ -18,15 +19,15 @@ ENV ALLOW_ROOT 1
 ENV EVENT_LOOP_POLICY uvloop
 ENV DB_DIRECTORY /data
 ENV COIN=BitCoin
-ENV SERVICES=tcp://:50001
-ENV SSL_CERTFILE ${DB_DIRECTORY}/electrumx.crt
-ENV SSL_KEYFILE ${DB_DIRECTORY}/electrumx.key
+ENV SERVICES=tcp://0.0.0.0:50001,ws://0.0.0.0:50002,rpc://0.0.0.0:8000,http://0.0.0.0:8080
 ENV HOST ""
-
-WORKDIR /data
+ENV CACHE_MB=2000
+ENV MAX_SEND=3000000
+ENV COST_SOFT_LIMIT=100000
+ENV COST_HARD_LIMIT=1000000
 
 COPY ./bin /usr/local/bin
 
-EXPOSE 50001
+EXPOSE 50001 50002 8000 8080
 
 CMD ["init"]

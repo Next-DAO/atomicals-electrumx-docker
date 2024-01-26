@@ -6,11 +6,16 @@ services:
     ports:
       - 50001:50001
       - 50002:50002
-      - 50004:50004
       - 8000:8000
+      - 8080:8080
+    healthcheck:
+      test: "nc -z localhost 50001"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     volumes:
-      - ./data-dev:/data
+      - ./electrumx-data-dev:/data
     environment:
       - DAEMON_URL=${DAEMON_URL:?}
       - COIN=BitCoin
-      

@@ -1,16 +1,21 @@
 version: '3'
 services:
   electrumx:
-    image: lucky2077/atomicals-electrumx:latest
+    image: lucky2077/atomicals-electrumx:v.1.3.8.0
     restart: always
     ports:
       - 50001:50001
       - 50002:50002
-      - 50004:50004
       - 8000:8000
+      - 8080:8080
+    healthcheck:
+      test: "nc -z localhost 50001"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     volumes:
-      - ./data:/data
+      - ./electrumx-data:/data
     environment:
       - DAEMON_URL=${DAEMON_URL:?}
       - COIN=BitCoin
-      
