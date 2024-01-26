@@ -1,6 +1,6 @@
 # Atomicals ElectrumX Docker
 
-Aim to provide a simple and easy way to run [atomicals-electrumx](https://github.com/atomicals/atomicals-electrumx) server.
+Aims to provide a simple and easy way to run [atomicals-electrumx](https://github.com/atomicals/atomicals-electrumx) server.
 
 ## Requirements
 
