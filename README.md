@@ -66,9 +66,12 @@ Double check your `bitcoin.conf` and `docker-compose.yml`.
 1. If your local ip included in `rpcallowip` of `bitcoin.conf`?
 2. If `bitcoind` listen on `8332` port?
 3. Use your local ip instead of `127.0.0.1` in `docker-compose.yml`, eg: `192.168.50.2`
-4. Is `bitcoind` rpc username and password correct?
 
-### 3. Why the sync is so slow?
+### 3. ERROR:Daemon:daemon service refused: Forbidden. Retrying occasionally...
+
+Check if `bitcoind` rpc username and password correct?
+
+### 4. Why the sync is so slow?
 
 There are many reasons that may cause the sync slow.
 
