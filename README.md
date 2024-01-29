@@ -30,8 +30,8 @@ rpcbind=0.0.0.0
 
 Edit `docker-compose.yml`:
 
-- if BTC full node is running on another host, change `127.0.0.1` to the `ip` of the host.
-- also you can change `nextdao:nextdao` to your `rpcuser:rpcpassword` in `bitcoin.conf
+- Change `127.0.0.1` to `lan ip` of the bitcoin core host, eg: 192.168.50.2.
+- Also change `nextdao:nextdao` to your `rpcuser:rpcpassword` in `bitcoin.conf
 
 ### 2. Run the RPC server:
 
@@ -59,19 +59,22 @@ docker-compose ps
 
 If you see `electrumx` is `healthy`, then the server is ready.
 
-### 2. Why `electrumx` can't connect to `bitcoind`?
+### 2. ERROR:Daemon:connection problem - check your daemon is running. Retrying occasionally...
 
-Double check your `bitcoin.conf` and `docker-compose.yml`.
-
-1. If your local ip included in `rpcallowip` of `bitcoin.conf`?
-2. If `bitcoind` listen on `8332` port?
-3. Use your local ip instead of `127.0.0.1` in `docker-compose.yml`, eg: `192.168.50.2`
+1. Check if bitcoind is running.
+2. Check if `rpcbind` include the `ip` used in `DAEMON_URL`
 
 ### 3. ERROR:Daemon:daemon service refused: Forbidden. Retrying occasionally...
 
-Check if `bitcoind` rpc username and password correct?
+1. Run `docker-compose ps` to check your container name. eg: `electrumx-electrumx-1`
+2. Run `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' electrumx-electrumx-1` to get container ip
+3. Check if the ip in rpcallow range
 
-### 4. Why the sync is so slow?
+### 4. ERROR:Daemon:daemon service refused: Unauthorize. Retrying occasionally...
+
+Check if rpc username and password correct?
+
+### 5. Why the sync is so slow?
 
 There are many reasons that may cause the sync slow.
 
