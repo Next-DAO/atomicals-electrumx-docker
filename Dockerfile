@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.5-labs
 
-FROM python:3.9-alpine3.16
+FROM python:3.11.7-alpine3.19
 
 ARG VERSION=master
 ADD https://github.com/atomicals/atomicals-electrumx.git#${VERSION} /electrumx
@@ -9,6 +9,7 @@ WORKDIR /electrumx
 
 RUN set -ex && \
     apk add --no-cache build-base git openssl leveldb-dev && \
+    sed -i 's%merkletools.*%merkletools\ @\ git+https://github.com/Tierion/pymerkletools@f10d71e%' requirements.txt && \
     pip install .[ujson,uvloop,crypto] && \
     apk del build-base git
 
