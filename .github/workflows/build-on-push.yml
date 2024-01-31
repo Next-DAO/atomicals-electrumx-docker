@@ -11,5 +11,6 @@ jobs:
       id-token: write
     uses: ./.github/workflows/build-image.yml
     with:
-      image-version: latest
+      # lastest for master, otherwise the branch name
+      image-version: ${{ github.ref_name == 'master' && 'latest' || github.ref_name }}
     secrets: inherit
