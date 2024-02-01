@@ -9,6 +9,7 @@ WORKDIR /electrumx
 
 RUN set -ex && \
     apk add --no-cache build-base git openssl leveldb-dev && \
+    sed -i 's%merkletools.*%merkletools\ @\ git+https://github.com/Tierion/pymerkletools@f10d71e%' requirements.txt && \
     pip install .[ujson,uvloop,crypto] && \
     apk del build-base git
 
