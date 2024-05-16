@@ -8,12 +8,6 @@ services:
       - 50002:50002
       - 8000:8000
       - 8080:8080
-    healthcheck:
-      test: "nc -z localhost 50001"
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
     volumes:
       - ./electrumx-data:/data
     environment:

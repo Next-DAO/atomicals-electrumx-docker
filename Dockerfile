@@ -30,4 +30,6 @@ COPY ./bin /usr/local/bin
 
 EXPOSE 50001 50002 8000 8080
 
+HEALTHCHECK CMD netstat -ltn | grep -c ":8080" > /dev/null; if [ 0 != $? ]; then exit 1; fi;
+
 CMD ["init"]
