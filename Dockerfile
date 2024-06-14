@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.5-labs
 
-FROM python:3.9-alpine3.16
+FROM python:3.10-alpine3.16
 
 ARG VERSION=master
 ADD https://github.com/atomicals/atomicals-electrumx.git#${VERSION} /electrumx
@@ -32,4 +32,4 @@ EXPOSE 50001 50002 8000 8080
 
 HEALTHCHECK CMD netstat -ltn | grep -c ":8080" > /dev/null; if [ 0 != $? ]; then exit 1; fi;
 
-CMD ["init"]
+CMD ["my_init"]
