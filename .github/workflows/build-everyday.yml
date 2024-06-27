@@ -13,3 +13,12 @@ jobs:
     with:
       image-version: latest
     secrets: inherit
+  build-develop:
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/build-image.yml
+    with:
+      image-version: develop
+      electrumx-version: develop
+    secrets: inherit
