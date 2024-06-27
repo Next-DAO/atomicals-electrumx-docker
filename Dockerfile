@@ -9,6 +9,10 @@ WORKDIR /electrumx
 
 RUN set -ex && \
     apk add --no-cache build-base git openssl leveldb-dev && \
+    # fix pyproject.toml temporally
+    sed -i 's/requires =.*/requires = ["setuptools", "setuptools-scm"]/' pyproject.toml && \
+    sed -i 's/build-backend =.*/build-backend = "setuptools.build_meta"/' pyproject.toml && \
+    sed -i 's/license =.*/license = {text = "MIT Licence"}/' pyproject.toml && \
     pip install .[ujson,uvloop,crypto] && \
     apk del build-base git
 
