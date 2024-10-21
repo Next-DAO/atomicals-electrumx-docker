@@ -6,7 +6,8 @@ on:
       electrumx-version:
         description: "ElectrumX Version, eg: v1.2.1"
         required: true
-
+      image-version:
+        description: "The version of the image to build"
 jobs:
   build:
     permissions:
@@ -14,6 +15,7 @@ jobs:
       id-token: write
     uses: ./.github/workflows/build-image.yml
     with:
-      image-version: ${{ inputs.electrumx-version }}
+      # if image-version is not provided, it will default to electrumx-version
+      image-version: ${{ inputs.image-version || inputs.electrumx-version }}
       electrumx-version: ${{ inputs.electrumx-version }}
     secrets: inherit

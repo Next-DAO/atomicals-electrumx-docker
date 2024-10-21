@@ -6,6 +6,7 @@ ARG VERSION=master
 ADD https://github.com/atomicals/atomicals-electrumx.git#${VERSION} /electrumx
 
 WORKDIR /electrumx
+COPY patches patches
 
 RUN set -ex && \
     apk add --no-cache build-base git openssl leveldb-dev && \
